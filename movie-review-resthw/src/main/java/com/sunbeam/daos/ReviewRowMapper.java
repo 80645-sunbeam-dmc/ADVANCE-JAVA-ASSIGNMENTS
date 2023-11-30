@@ -1,0 +1,30 @@
+package com.sunbeam.daos;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import com.sunbeam.pojos.Review;
+
+/**
+ * Advanced Java @ DMC Sep 2023
+ * Trainer: Nilesh Ghule
+ * Time: 2023-11-28 16:40 
+ */
+@Component
+public class ReviewRowMapper implements RowMapper<Review> {
+	@Override
+	public Review mapRow(ResultSet rs, int rowNum) throws SQLException {
+		int id = rs.getInt("id");
+		int movieId = rs.getInt("movie_id");
+		String review = rs.getString("review");
+		int rating = rs.getInt("rating");
+		int userId = rs.getInt("user_id");
+		Date modified = rs.getTimestamp("modified");
+		Review r = new Review(id, movieId, userId, review, rating, modified);
+		return r;
+	}
+}

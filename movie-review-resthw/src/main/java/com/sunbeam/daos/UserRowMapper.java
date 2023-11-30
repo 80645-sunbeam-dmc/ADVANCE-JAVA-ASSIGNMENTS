@@ -1,0 +1,34 @@
+package com.sunbeam.daos;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import com.sunbeam.pojos.User;
+
+/**
+ * Advanced Java @ DMC Sep 2023
+ * Trainer: Nilesh Ghule
+ * Time: 2023-11-28 15:32 
+ */
+@Component
+public class UserRowMapper implements RowMapper<User> {
+	@Override
+	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+		int id = rs.getInt("id");
+		String fname = rs.getString("first_name");
+		String lname = rs.getString("last_name");
+		String password = rs.getString("password");
+		String email = rs.getString("email");
+		String mobile = rs.getString("mobile");
+		Date birth = rs.getDate("birth");
+		return new User(id, fname, lname, email, password, mobile, birth);
+	}
+}
+
+
+
+
